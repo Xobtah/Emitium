@@ -24,11 +24,19 @@ namespace Emitium
         EventEmitter    &AddListener(std::string, std::function<void (Args...)>);
         EventEmitter    &AddListener(std::string, std::function<void ()>);
 
+        template<typename LambdaType>
+        EventEmitter    &AddListener(std::string event_id, LambdaType lambda)
+        { return (AddListener(event_id, make_function(lambda))); }
+
         EventEmitter    &RemoveListener(std::string);
 
         template <typename... Args>
         EventEmitter    &On(std::string, std::function<void (Args...)>);
         EventEmitter    &On(std::string, std::function<void ()>);
+
+        template<typename LambdaType>
+        EventEmitter    &On(std::string event_id, LambdaType lambda)
+        { return On(event_id, make_function(lambda)); }
 
         template <typename... Args>
         EventEmitter    &Emit(std::string, Args...);
@@ -54,6 +62,17 @@ namespace Emitium
 
             std::function<void (Args...)> cb;
         };
+
+        template <typename T>
+        struct function_traits : public function_traits<decltype(&T::operator())> {};
+
+        template <typename ClassType, typename ReturnType, typename... Args>
+        struct function_traits<ReturnType(ClassType::*)(Args...) const>
+        { typedef std::function<ReturnType (Args...)> f_type; };
+
+        template <typename L>
+        typename function_traits<L>::f_type make_function(L l)
+        { return ((typename function_traits<L>::f_type)(l)); }
 
         std::multimap<std::string, std::shared_ptr<ListenerBase>>  _listeners;
     };

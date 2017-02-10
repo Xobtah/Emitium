@@ -10,19 +10,19 @@
 int main()
 {
     Emitium::EventEmitter   event;
-    //char                    string[] = "World";
 
-    /*event.On("hi", [](void *param) -> void*
-    {
-        std::cout << "Hello " << reinterpret_cast<char*>(param) << "!" << std::endl;
-        return (NULL);
-    }).Emit("hi", string);
-    event.On("hello", []()
-    {
-        std::cout << "Hello!" << std::endl;
-    }).Emit("hello");*/
     event.On("hi", []() {
         std::cout << "Hello World!" << std::endl;
     }).Emit("hi");
+
+    event.On("twice", []() {
+        std::cout << "Hello World!1" << std::endl;
+    }).On("twice", []() {
+        std::cout << "Hello World!2" << std::endl;
+    }).Emit("twice");
+
+    event.On("hello", [](int nb) {
+        std::cout << "Hello " << nb << "!" << std::endl;
+    }).Emit("hello", 42);
     return (0);
 }
