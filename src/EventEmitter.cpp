@@ -12,6 +12,16 @@ namespace Emitium
 
     EventEmitter::EventEmitter() {}
 
+    EventEmitter::EventEmitter(const EventEmitter &ee) : _listeners(ee._listeners) {}
+
+    EventEmitter    &EventEmitter::operator=(const EventEmitter &ee)
+    {
+        if (this == &ee)
+            return (*this);
+        _listeners = ee._listeners;
+        return (*this);
+    }
+
     EventEmitter::~EventEmitter() {}
 
     /*

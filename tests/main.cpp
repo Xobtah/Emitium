@@ -24,5 +24,9 @@ int main()
     event.On("hello", [](int nb) {
         std::cout << "Hello " << nb << "!" << std::endl;
     }).Emit("hello", 42);
+
+    Emitium::EventEmitter   event2 = event;
+
+    event2.Emit("hello", 24);
     return (0);
 }

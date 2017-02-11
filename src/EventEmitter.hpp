@@ -18,6 +18,8 @@ namespace Emitium
     {
     public:
         EventEmitter();
+        EventEmitter(const EventEmitter&);
+        EventEmitter    &operator=(const EventEmitter&);
         ~EventEmitter();
 
         template <typename... Args>
@@ -42,9 +44,6 @@ namespace Emitium
         EventEmitter    &Emit(std::string, Args...);
 
     private:
-        EventEmitter(const EventEmitter&) = delete;
-        const EventEmitter  &operator=(const EventEmitter&) = delete;
-
         struct ListenerBase
         {
             ListenerBase() {}
