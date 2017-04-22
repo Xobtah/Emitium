@@ -36,3 +36,7 @@ You can also chain the functions:
 ```markdown
 obj.On(...).On(...).Emit(...).On(...);
 ```
+
+### To Do
+- Being able to pass function pointers as a callback
+- Being able to pass references as callback parameter
