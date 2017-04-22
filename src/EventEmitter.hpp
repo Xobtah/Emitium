@@ -12,7 +12,7 @@
 #include <list>
 #include <algorithm>
 
-namespace Emitium
+namespace ium
 {
     class EventEmitter
     {

@@ -4,7 +4,7 @@
 
 #include "EventEmitter.hpp"
 
-namespace Emitium
+namespace ium
 {
     /*
      *  Ctor & Dtor

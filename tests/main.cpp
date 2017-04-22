@@ -9,7 +9,7 @@
 
 int main()
 {
-    Emitium::EventEmitter   event;
+    ium::EventEmitter   event;
 
     event.On("hi", []() {
         std::cout << "Hello World!" << std::endl;
@@ -25,8 +25,9 @@ int main()
         std::cout << "Hello " << nb << "!" << std::endl;
     }).Emit("hello", 42);
 
-    Emitium::EventEmitter   event2 = event;
+    ium::EventEmitter   event2 = event;
 
-    event2.Emit("hello", 24);
+    event2.Emit("hello", 24)/*.On("ref", [](ium::EventEmitter &e) { e.Emit("hello"); })
+            .Emit("ref", event2)*/;
     return (0);
 }
